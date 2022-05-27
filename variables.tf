@@ -22,9 +22,9 @@ variable "resource_group_name" {
 }
 
 variable "mgmg_resource_group" {
-  type = string
+  type        = string
   description = "resource group with KV used for certificates"
-  default = "iq3-basemanagement"
+  default     = "iq3-basemanagement"
 }
 
 variable "vnet_resource_group_name" {
