@@ -21,7 +21,7 @@ variable "resource_group_name" {
   description = "The resource group to create the application gateway in"
 }
 
-variable "mgmg_resource_group" {
+variable "mgmt_resource_group" {
   type        = string
   description = "resource group with KV used for certificates"
   default     = "iq3-basemanagement"
