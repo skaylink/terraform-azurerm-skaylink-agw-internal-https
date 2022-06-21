@@ -41,10 +41,10 @@ resource "azurerm_key_vault_access_policy" "allow_user_identiy_cert" {
   tenant_id = data.azurerm_client_config.current.tenant_id
   object_id = azurerm_user_assigned_identity.identity.principal_id
   secret_permissions = [
-    "get"
+    "Get"
   ]
   certificate_permissions = [
-    "get"
+    "Get"
   ]
 }
 
@@ -151,6 +151,7 @@ resource "azurerm_application_gateway" "agw" {
     http_listener_name         = "listener-443"
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = "setting-443-to-${var.backend_type}"
+    priority                   = 10
   }
 
   request_routing_rule {
@@ -158,6 +159,7 @@ resource "azurerm_application_gateway" "agw" {
     rule_type                   = "Basic"
     http_listener_name          = "listener-80"
     redirect_configuration_name = "redirect-80-to-443"
+    priority                    = 11
   }
 
   probe {
@@ -171,6 +173,7 @@ resource "azurerm_application_gateway" "agw" {
     unhealthy_threshold                       = 3
 
     match {
+      body = ""
       status_code = [
         "200-499",
       ]
@@ -196,6 +199,7 @@ resource "azurerm_application_gateway" "agw" {
   }
 
   identity {
+    type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.identity.id]
   }
 

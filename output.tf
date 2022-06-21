@@ -17,5 +17,5 @@
 # For questions and contributions please contact info@iq3cloud.com
 
 output "backend_pool" {
-  value = azurerm_application_gateway.agw.backend_address_pool[0]
+  value = azurerm_application_gateway.agw.backend_address_pool
 }
